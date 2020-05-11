@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Title</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+  </head>
+  <body>
+    <script
+      src="https://code.jquery.com/jquery-3.5.1.js"
+      integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+      crossorigin="anonymous"
+    ></script>
+
+    <script>
+      var url =
+        "https://cors-anywhere.herokuapp.com/http://elogistic.ms.demo-qs.xyz:8010/api/v1/user";
+      $.ajax({
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        type: "POST",
+        url: url,
+        data: {
+          username: "CLICKARGO",
+          password: "CKARGO123",
+          phoneNumber: "08117044456",
+        },
+        dataType: "json",
+        success: function (response) {
+          console.log(response);
+        },
+      });
+    </script>
+  </body>
+</html>

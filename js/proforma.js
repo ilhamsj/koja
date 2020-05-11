@@ -1,13 +1,16 @@
 var BILLING_GetBillingDetail = (proforma_invoice_no) => {
-  fetch("http://localhost:8012/api/v1/billing/detail", {
-    method: "POST",
-    body: JSON.stringify({
-      proforma_invoice_no: proforma_invoice_no,
-    }),
-    headers: {
-      "Content-type": "application/json; charset=UTF-8",
-    },
-  })
+  fetch(
+    "https://cors-anywhere.herokuapp.com/http://elogistic.ms.demo-qs.xyz:8010/api/v1/billing/detail",
+    {
+      method: "POST",
+      body: JSON.stringify({
+        proforma_invoice_no: proforma_invoice_no,
+      }),
+      headers: {
+        "Content-type": "application/json; charset=UTF-8",
+      },
+    }
+  )
     .then((response) => response.json())
     .then((result) => {
       $.map(result, function (val, key) {
@@ -23,15 +26,18 @@ var BILLING_GetBillingDetail = (proforma_invoice_no) => {
 };
 
 var BILLING_GetInvoice = (proforma_invoice_no, url) => {
-  fetch("http://localhost:8012/api/v1/billing/invoice", {
-    method: "POST",
-    body: JSON.stringify({
-      proforma_invoice_no: proforma_invoice_no,
-    }),
-    headers: {
-      "Content-type": "application/json; charset=UTF-8",
-    },
-  })
+  fetch(
+    "https://cors-anywhere.herokuapp.com/http://elogistic.ms.demo-qs.xyz:8010/api/v1/billing/invoice",
+    {
+      method: "POST",
+      body: JSON.stringify({
+        proforma_invoice_no: proforma_invoice_no,
+      }),
+      headers: {
+        "Content-type": "application/json; charset=UTF-8",
+      },
+    }
+  )
     .then((response) => response.json())
     .then((result) => {
       console.log(result);

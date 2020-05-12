@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Buat Transaksi</title>
+    <style>
+      table {
+        border-collapse: collapse;
+      }
+      td,
+      th {
+        border: 1px solid #ddd;
+        padding: 8px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Login Koja</h1>
+    <h4>usernameFStream</h4>
+    <input
+      type="text"
+      name="usernameFStream"
+      id="usernameFStream"
+      placeholder="usernameFStream"
+      value="08117044456"
+    />
+
+    <h4>passwordFStream</h4>
+    <input
+      type="text"
+      name="passwordFStream"
+      id="passwordFStream"
+      placeholder="passwordFStream"
+      value="202cb962ac59075b964b07152d234b70"
+    />
+
+    <h4>deviceName</h4>
+    <input
+      type="text"
+      name="deviceName"
+      id="deviceName"
+      placeholder="deviceName"
+      value="CLICKARGO"
+    />
+
+    <p>
+      <button type="submit">Login</button>
+    </p>
+
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      crossorigin="anonymous"
+    ></script>
+    <script>
+      $("button").click(function (e) {
+        e.preventDefault();
+        var usernameFStream = $("#usernameFStream").val();
+        var passwordFStream = $("#passwordFStream").val();
+        var deviceName = $("#deviceName").val();
+        AUTH_GetLogin(usernameFStream, passwordFStream, deviceName);
+      });
+
+      var AUTH_GetLogin = (usernameFStream, passwordFStream, deviceName) => {
+        fetch(
+          "https://cors-anywhere.herokuapp.com/http://elogistic.ms.demo-qs.xyz:8010/api/v1/login",
+          {
+            method: "POST",
+            body: JSON.stringify({
+              usernameFStream: usernameFStream,
+              passwordFStream: passwordFStream,
+              deviceName: deviceName,
+            }),
+            headers: {
+              "Content-type": "application/json; charset=UTF-8",
+            },
+          }
+        )
+          .then((response) => response.json())
+          .then((result) => {
+            console.log(result);
+            alert(result.MESSAGE);
+          });
+      };
+    </script>
+  </body>
+</html>

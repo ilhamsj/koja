@@ -77,7 +77,7 @@
           .then((response) => response.json())
           .then((result) => {
             console.log(result);
-            if (result.MESSAGE == "FALSE") {
+            if (result.STATUS == "FALSE") {
               alert(result.MESSAGE);
             } else {
               alert("Login berhasil");

@@ -34,8 +34,8 @@ $("#confirmTransaction").click(function (e) {
 
 var MAIN_GetTransactionsType = (groupId, categoryId, terminalId) => {
   fetch(
-    // "https://cors-anywhere.herokuapp.com/http://elogistic.ms.demo-qs.xyz:8010/api/v1/transaction",
-    "http://localhost:8012/api/v1/transaction",
+    "https://cors-anywhere.herokuapp.com/http://elogistic.ms.demo-qs.xyz:8010/api/v1/transaction",
+    // "http://localhost:8012/api/v1/transaction",
     {
       method: "POST",
       body: JSON.stringify({
@@ -62,8 +62,8 @@ var MAIN_GetTransactionsType = (groupId, categoryId, terminalId) => {
 
 var MAIN_GetDocCodeCustoms = (groupId, categoryId) => {
   fetch(
-    // "https://cors-anywhere.herokuapp.com/http://elogistic.ms.demo-qs.xyz:8010/api/v1/document",
-    "http://localhost:8012/api/v1/document",
+    "https://cors-anywhere.herokuapp.com/http://elogistic.ms.demo-qs.xyz:8010/api/v1/document",
+    // "http://localhost:8012/api/v1/document",
     {
       method: "POST",
       body: JSON.stringify({
@@ -89,8 +89,8 @@ var MAIN_GetDocCodeCustoms = (groupId, categoryId) => {
 
 var MAIN_GetCoreor = (bl_nbr, terminal_id) => {
   fetch(
-    // "https://cors-anywhere.herokuapp.com/http://elogistic.ms.demo-qs.xyz:8010/api/v1/coreor",
-    "http://localhost:8012/api/v1/coreor",
+    "https://cors-anywhere.herokuapp.com/http://elogistic.ms.demo-qs.xyz:8010/api/v1/coreor",
+    // "http://localhost:8012/api/v1/coreor",
     {
       method: "POST",
       body: JSON.stringify({
@@ -116,8 +116,8 @@ var MAIN_GetDocumentCustomsNGen = (CUST_ID_PPJK, terminal_id) => {
   var transactions_type_id = $("#transactionType").val();
 
   fetch(
-    // "https://cors-anywhere.herokuapp.com/http://elogistic.ms.demo-qs.xyz:8010/api/v1/document/custom",
-    "http://localhost:8012/api/v1/document/custom",
+    "https://cors-anywhere.herokuapp.com/http://elogistic.ms.demo-qs.xyz:8010/api/v1/document/custom",
+    // "http://localhost:8012/api/v1/document/custom",
     {
       method: "POST",
       body: JSON.stringify({
@@ -181,8 +181,8 @@ var BILLING_ConfirmTransaction = () => {
   var document_no = $("#document_no").val();
 
   fetch(
-    // "https://cors-anywhere.herokuapp.com/http://elogistic.ms.demo-qs.xyz:8010/api/v1/transaction/confirm",
-    "http://localhost:8012/api/v1/transaction/confirm",
+    "https://cors-anywhere.herokuapp.com/http://elogistic.ms.demo-qs.xyz:8010/api/v1/transaction/confirm",
+    // "http://localhost:8012/api/v1/transaction/confirm",
     {
       method: "POST",
       body: JSON.stringify({
@@ -262,8 +262,8 @@ var showError = (status, message) => {
 var checkStatusContainer = (container) => {
   fetch(
     `https://cors-anywhere.herokuapp.com/http://elogistic.ms.demo-qs.xyz:8010/api/v1/container/${container}`,
-    // {
-      fetch(`http://localhost:8012/api/v1/container/${container}`, {
+    {
+      // fetch(`http://localhost:8012/api/v1/container/${container}`, {
       method: "GET",
       headers: {
         "Content-type": "application/json; charset=UTF-8",
@@ -287,8 +287,8 @@ var checkStatusContainer = (container) => {
 var storeStatusContainer = (container, invoice, proforma) => {
   fetch(
     "https://cors-anywhere.herokuapp.com/http://elogistic.ms.demo-qs.xyz:8010/api/v1/container",
-    // {
-      fetch("http://localhost:8012/api/v1/container", {
+    {
+      // fetch("http://localhost:8012/api/v1/container", {
       method: "POST",
       body: JSON.stringify({
         container: container,

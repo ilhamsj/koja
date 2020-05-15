@@ -260,12 +260,16 @@ var showError = (status, message) => {
 };
 
 var checkStatusContainer = (container) => {
-  fetch(`http://localhost:8012/api/v1/container/${container}`, {
-    method: "GET",
-    headers: {
-      "Content-type": "application/json; charset=UTF-8",
-    },
-  })
+  fetch(
+    `https://cors-anywhere.herokuapp.com/http://elogistic.ms.demo-qs.xyz:8010/api/v1/container/${container}`,
+    // {
+      fetch(`http://localhost:8012/api/v1/container/${container}`, {
+      method: "GET",
+      headers: {
+        "Content-type": "application/json; charset=UTF-8",
+      },
+    }
+  )
     .then((response) => response.json())
     .then((json) => {
       console.log(json);
@@ -281,17 +285,21 @@ var checkStatusContainer = (container) => {
 };
 
 var storeStatusContainer = (container, invoice, proforma) => {
-  fetch("http://localhost:8012/api/v1/container", {
-    method: "POST",
-    body: JSON.stringify({
-      container: container,
-      invoice: invoice,
-      proforma: proforma,
-    }),
-    headers: {
-      "Content-type": "application/json; charset=UTF-8",
-    },
-  })
+  fetch(
+    "https://cors-anywhere.herokuapp.com/http://elogistic.ms.demo-qs.xyz:8010/api/v1/container",
+    // {
+      fetch("http://localhost:8012/api/v1/container", {
+      method: "POST",
+      body: JSON.stringify({
+        container: container,
+        invoice: invoice,
+        proforma: proforma,
+      }),
+      headers: {
+        "Content-type": "application/json; charset=UTF-8",
+      },
+    }
+  )
     .then((response) => response.json())
     .then((json) => {
       console.log(json);

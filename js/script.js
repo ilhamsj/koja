@@ -26,13 +26,16 @@ $("#confirmTransaction").click(function (e) {
   if (cntrId.length == 0) {
     alert("please select");
   } else {
-    BILLING_ConfirmTransaction();
+    cntrId.map((val) => {
+      checkStatusContainer(val);
+    });
   }
 });
 
 var MAIN_GetTransactionsType = (groupId, categoryId, terminalId) => {
   fetch(
-    "https://cors-anywhere.herokuapp.com/http://elogistic.ms.demo-qs.xyz:8010/api/v1/transaction",
+    // "https://cors-anywhere.herokuapp.com/http://elogistic.ms.demo-qs.xyz:8010/api/v1/transaction",
+    "http://localhost:8012/api/v1/transaction",
     {
       method: "POST",
       body: JSON.stringify({
@@ -59,7 +62,8 @@ var MAIN_GetTransactionsType = (groupId, categoryId, terminalId) => {
 
 var MAIN_GetDocCodeCustoms = (groupId, categoryId) => {
   fetch(
-    "https://cors-anywhere.herokuapp.com/http://elogistic.ms.demo-qs.xyz:8010/api/v1/document",
+    // "https://cors-anywhere.herokuapp.com/http://elogistic.ms.demo-qs.xyz:8010/api/v1/document",
+    "http://localhost:8012/api/v1/document",
     {
       method: "POST",
       body: JSON.stringify({
@@ -85,7 +89,8 @@ var MAIN_GetDocCodeCustoms = (groupId, categoryId) => {
 
 var MAIN_GetCoreor = (bl_nbr, terminal_id) => {
   fetch(
-    "https://cors-anywhere.herokuapp.com/http://elogistic.ms.demo-qs.xyz:8010/api/v1/coreor",
+    // "https://cors-anywhere.herokuapp.com/http://elogistic.ms.demo-qs.xyz:8010/api/v1/coreor",
+    "http://localhost:8012/api/v1/coreor",
     {
       method: "POST",
       body: JSON.stringify({
@@ -111,7 +116,8 @@ var MAIN_GetDocumentCustomsNGen = (CUST_ID_PPJK, terminal_id) => {
   var transactions_type_id = $("#transactionType").val();
 
   fetch(
-    "https://cors-anywhere.herokuapp.com/http://elogistic.ms.demo-qs.xyz:8010/api/v1/document/custom",
+    // "https://cors-anywhere.herokuapp.com/http://elogistic.ms.demo-qs.xyz:8010/api/v1/document/custom",
+    "http://localhost:8012/api/v1/document/custom",
     {
       method: "POST",
       body: JSON.stringify({
@@ -152,7 +158,8 @@ var MAIN_GetDocumentCustomsNGen = (CUST_ID_PPJK, terminal_id) => {
           for (let i = 0; i < json.NO_CONT.length; i++) {
             $("table > tbody").append(`<tr>
             <td><input type="checkbox" name="" id="${json.NO_CONT[i]}" ${
-              json.STATUS_PAID[i] == "VALID" ? "" : "disabled"
+              // json.STATUS_PAID[i] == "VALID" ? "" : "disabled"
+              json.STATUS_PAID[i] == "VALID" ? "" : ""
             }/></td>
             <td>${json.NO_CONT[i]}</td>
             <td>${json.CNTR_SIZE[i]} / ${json.CNTR_TYPE[i]} </td>
@@ -174,7 +181,8 @@ var BILLING_ConfirmTransaction = () => {
   var document_no = $("#document_no").val();
 
   fetch(
-    "https://cors-anywhere.herokuapp.com/http://elogistic.ms.demo-qs.xyz:8010/api/v1/transaction/confirm",
+    // "https://cors-anywhere.herokuapp.com/http://elogistic.ms.demo-qs.xyz:8010/api/v1/transaction/confirm",
+    "http://localhost:8012/api/v1/transaction/confirm",
     {
       method: "POST",
       body: JSON.stringify({
@@ -236,6 +244,9 @@ var BILLING_ConfirmTransaction = () => {
     .then((json) => {
       console.log(json);
       alert(`${json.TRANSACTION_ID} ${json.MESSAGE}`);
+      cntrId.map((container) => {
+        storeStatusContainer(container, json.TRANSACTION_ID, 100);
+      });
     });
 };
 
@@ -246,4 +257,43 @@ var showError = (status, message) => {
   } else {
     return true;
   }
+};
+
+var checkStatusContainer = (container) => {
+  fetch(`http://localhost:8012/api/v1/container/${container}`, {
+    method: "GET",
+    headers: {
+      "Content-type": "application/json; charset=UTF-8",
+    },
+  })
+    .then((response) => response.json())
+    .then((json) => {
+      console.log(json);
+      if (json.success == false) {
+        BILLING_ConfirmTransaction();
+        console.log("buat transaksi");
+      } else {
+        alert(
+          `container ${json.container} dengan id transaksi ${json.invoice} sudah ada`
+        );
+      }
+    });
+};
+
+var storeStatusContainer = (container, invoice, proforma) => {
+  fetch("http://localhost:8012/api/v1/container", {
+    method: "POST",
+    body: JSON.stringify({
+      container: container,
+      invoice: invoice,
+      proforma: proforma,
+    }),
+    headers: {
+      "Content-type": "application/json; charset=UTF-8",
+    },
+  })
+    .then((response) => response.json())
+    .then((json) => {
+      console.log(json);
+    });
 };

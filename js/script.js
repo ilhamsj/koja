@@ -2,17 +2,17 @@ var CUST_ID_PPJK = 7407;
 var groupId = 6;
 var terminalId = "KOJA";
 var cntrId = [];
-// const host = "http://localhost:8012";
+// const host = "http://localhost:8012/api/v1";
 const host =
-  "https://cors-anywhere.herokuapp.com/http://elogistic.ms.demo-qs.xyz:8010";
+  "https://cors-anywhere.herokuapp.com/http://elogistic.ms.demo-qs.xyz:8010/api/v1";
 
-var MAIN_GetTransactionsType_Url = `${host}/api/v1/transaction`;
-var MAIN_GetDocCodeCustoms_url = `${host}/api/v1/document`;
-var MAIN_GetCoreor_url = `${host}/api/v1/coreor`;
-var MAIN_GetDocumentCustomsNGen_url = `${host}/api/v1/document/custom`;
-var BILLING_ConfirmTransaction_url = `${host}/api/v1/transaction/confirm`;
-var checkStatusContainer_url = `${host}/api/v1/container`; // container/id
-var storeStatusContainer_url = `${host}/api/v1/container`;
+var MAIN_GetTransactionsType_Url = `${host}/transaction`;
+var MAIN_GetDocCodeCustoms_url = `${host}/document`;
+var MAIN_GetCoreor_url = `${host}/coreor`;
+var MAIN_GetDocumentCustomsNGen_url = `${host}/document/custom`;
+var BILLING_ConfirmTransaction_url = `${host}/transaction/confirm`;
+var checkStatusContainer_url = `${host}/container`; // container/id
+var storeStatusContainer_url = `${host}/container`;
 
 $("#categoryId").change(function (e) {
   e.preventDefault();

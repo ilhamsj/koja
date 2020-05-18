@@ -2,8 +2,9 @@ var CUST_ID_PPJK = 7407;
 var groupId = 6;
 var terminalId = "KOJA";
 var cntrId = [];
-const host = "http://localhost:8012";
-// const host = "https://cors-anywhere.herokuapp.com/http://elogistic.ms.demo-qs.xyz:8010";
+// const host = "http://localhost:8012";
+const host =
+  "https://cors-anywhere.herokuapp.com/http://elogistic.ms.demo-qs.xyz:8010";
 
 var MAIN_GetTransactionsType_Url = `${host}/api/v1/transaction`;
 var MAIN_GetDocCodeCustoms_url = `${host}/api/v1/document`;

@@ -16,8 +16,16 @@ $("#MAIN_GetDocumentCustomsNGen").click(function (e) {
 });
 
 $("table").on("change", "input", function () {
-  var id = $(this).attr("id");
-  cntrId.push(id);
+  var data = $(this).attr("id");
+
+  if (this.checked) {
+    cntrId.push(data);
+  } else {
+    const index = cntrId.indexOf(data);
+    if (index > -1) {
+      cntrId.splice(index, 1);
+    }
+  }
   console.log(cntrId);
 });
 
@@ -143,7 +151,6 @@ var MAIN_GetDocumentCustomsNGen = (CUST_ID_PPJK, terminal_id) => {
             $("table > tbody").append(`<tr>
             <td><input type="checkbox" name="" id="${json.NO_CONT[i]}" ${
               json.STATUS_PAID[i] == "VALID" ? "" : "disabled"
-              // json.STATUS_PAID[i] == "VALID" ? "" : ""
             }/></td>
             <td>${json.NO_CONT[i]}</td>
             <td>${json.CNTR_SIZE[i]} / ${json.CNTR_TYPE[i]} </td>

@@ -4,119 +4,174 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Buat Transaksi</title>
-    <style>
-      table {
-        border-collapse: collapse;
-      }
-      td,
-      th {
-        border: 1px solid #ddd;
-        padding: 8px;
-      }
-    </style>
+    <!-- Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
   </head>
   <body>
-    <h1>Koja</h1>
-    <p>
-      Kategori Transaksi<br />
-      <select name="categoryId" id="categoryId">
-        <option value="E">Export</option>
-        <option value="I">Import</option>
-      </select>
-    </p>
-    <p>
-      <label for="">Tipe Transaksi</label> <br />
-      <select name="transactionType" id="transactionType">
-        <option value="">Tipe Transaksi</option>
-      </select>
-    </p>
+    <div class="container">
+      <div class="row justify-content-center my-4">
+        <div class="col-md-8 col-sm-12">
+          <h1>Koja</h1>
 
-    <div style="display: flex; justify-content: space-between; width: 30%;">
-      <div>
-        <label for="">No Dokumen Beacukai</label> <br />
-        <input
-          type="text"
-          name="document_no_beacukai"
-          id="document_no_beacukai"
-        />
-      </div>
+          <div class="form-group">
+            <label for="">Kategori Transaksi</label>
+            <select class="form-control" name="categoryId" id="categoryId">
+              <option value="E">Export</option>
+              <option value="I">Import</option>
+            </select>
+          </div>
 
-      <div>
-        <label for="">Jenis Dokumen</label> <br />
-        <select name="documentId" id="documentId">
-          <option value="">Pilih Jenis Dokumen</option>
-        </select>
+          <div class="form-group">
+            <label for="">Tipe Transaksi</label> <br />
+            <select
+              class="form-control"
+              name="transactionType"
+              id="transactionType"
+            >
+              <option value="">Tipe Transaksi</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="">No Dokumen Beacukai</label>
+            <input
+              type="text"
+              class="form-control"
+              name="document_no_beacukai"
+              id="document_no_beacukai"
+              aria-describedby="helpId"
+              placeholder=""
+            />
+            <small id="helpId" class="form-text text-muted">Help text</small>
+          </div>
+
+          <div class="form-group">
+            <label for="">Jenis Dokumen</label> <br />
+            <select class="form-control" name="documentId" id="documentId">
+              <option value="">Pilih Jenis Dokumen</option>
+            </select>
+          </div>
+
+          <button
+            type="submit"
+            name=""
+            id="MAIN_GetDocumentCustomsNGen"
+            class="btn btn-primary"
+          >
+            Proses
+          </button>
+
+          <hr />
+          <div class="form-group">
+            <label for="">No D/O</label>
+            <input
+              type="text"
+              class="form-control"
+              name="document_no"
+              id="document_no"
+              aria-describedby="helpId"
+              placeholder="Document No"
+            />
+            <small id="helpId" class="form-text text-muted">Help text</small>
+          </div>
+
+          <div class="form-group">
+            <label for="">Shipping Date D/O</label>
+            <input
+              type="date"
+              class="form-control"
+              name="document_shipping_date"
+              id="document_shipping_date"
+              aria-describedby="helpId"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for=""> Jatuh Tempo D/O </label>
+            <input
+              type="date"
+              class="form-control"
+              name="do_expired"
+              id="do_expired"
+              aria-describedby="helpId"
+              readonly
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="">BL Number</label>
+            <input
+              type="text"
+              class="form-control"
+              name="bl_nbr"
+              id="bl_nbr"
+              placeholder="BL NUMBER"
+              readonly
+              aria-describedby="helpId"
+            />
+          </div>
+
+          <h3>Container</h3>
+
+          <div class="form-group">
+            <label for="">Paid Thru </label>
+            <input
+              type="date"
+              class="form-control"
+              name="paid_thru"
+              id="paid_thru"
+              aria-describedby="helpId"
+            />
+            <small id="helpId" class="form-text text-muted"
+              >Tanggal keluar kontainer, *Optional untuk export</small
+            >
+          </div>
+
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th>Pilih</th>
+                <th>CNTR_ID</th>
+                <th>SIZE/TYPE</th>
+                <th>STATUS</th>
+                <th>LOCATION TYPE</th>
+                <th>STACK</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+
+          <button
+            type="submit"
+            name=""
+            id="confirmTransaction"
+            class="btn btn-primary"
+          >
+            Proses
+          </button>
+        </div>
       </div>
     </div>
-    <br />
-    <button type="submit" id="MAIN_GetDocumentCustomsNGen">Proses</button>
-
-    <hr />
-    <label for="">No D/O </label>
-    <input
-      type="text"
-      name="document_no"
-      id="document_no"
-      placeholder="Document No"
-      readonly
-    />
-    <br />
-    <label for="">Shipping Date D/O</label>
-    <input
-      type="date"
-      name="document_shipping_date"
-      id="document_shipping_date"
-    />
-
-    <br />
-
-    <label for=""> Jatuh Tempo D/O </label>
-    <input
-      type="date"
-      name="do_expired"
-      id="do_expired"
-      placeholder="do_expired"
-      readonly
-    />
-    <br />
-    <label for="">BL Number</label>
-    <input
-      type="text"
-      name="bl_nbr"
-      id="bl_nbr"
-      placeholder="BL NUMBER"
-      readonly
-    />
-
-    <h3>Container</h3>
-
-    <p>
-      <label for="">Paid Thru </label>
-      <input type="date" name="paid_thru" id="paid_thru" /><br />
-      <span>(Tanggal keluar kontainer, *Optional untuk export)</span>
-    </p>
-
-    <table class="table" style="border: 1px solid black;">
-      <thead>
-        <tr>
-          <th>Pilih</th>
-          <th>CNTR_ID</th>
-          <th>SIZE/TYPE</th>
-          <th>STATUS</th>
-          <th>LOCATION TYPE</th>
-          <th>STACK</th>
-        </tr>
-      </thead>
-      <tbody></tbody>
-    </table>
-
-    <p>
-      <button type="submit" id="confirmTransaction">Proses</button>
-    </p>
-
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script
       src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
       integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
       crossorigin="anonymous"
     ></script>
     <script src="js/url.js"></script>

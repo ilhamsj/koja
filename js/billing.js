@@ -30,8 +30,7 @@ var BILLING_GetBilling = (transaction_id) => {
         }
       });
       window.open(
-        `${window.location.origin}/proforma.html?${result.PROFORMA_INVOICE_NO}`,
-        "_blank"
+        `${window.location.origin}/proforma.html?${result.PROFORMA_INVOICE_NO}`
       );
     });
 };

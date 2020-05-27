@@ -31,8 +31,19 @@ $("table").on("change", "input", function () {
 
 $("#confirmTransaction").click(function (e) {
   e.preventDefault();
+  var categoryId = $("#categoryId").val();
   if (cntrId.length == 0) {
     alert("please select");
+  } else if (categoryId == "I") {
+    var paid_thru = $("#paid_thru").val();
+    console.log(paid_thru);
+    if (paid_thru.trim().length == 0) {
+      alert("paid_thru tidak boleh kosong");
+    } else {
+      cntrId.map((val) => {
+        checkStatusContainer(val);
+      });
+    }
   } else {
     cntrId.map((val) => {
       checkStatusContainer(val);

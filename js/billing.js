@@ -15,7 +15,7 @@ var BILLING_GetBilling = (transaction_id) => {
         console.log(val);
         $("#url").val(result.DETAIL_BILLING.LINK);
         if (typeof val != "object") {
-          $("body > div").append(`<b>${key}</b> ${val} <br/>`);
+          $("#details").append(`<b>${key}</b> ${val} <br/>`);
         } else {
           $.map(val, function (elementOrValue, indexOrKey) {
             $("table > tbody").append(
@@ -29,6 +29,10 @@ var BILLING_GetBilling = (transaction_id) => {
           });
         }
       });
+      window.open(
+        `${window.location.origin}/proforma.html?${result.PROFORMA_INVOICE_NO}`,
+        "_blank"
+      );
     });
 };
 
@@ -82,11 +86,8 @@ var BILLING_GetProforma = (transaction_id, url) => {
     });
 };
 
-$("#transaction_id").change(function (e) {
-  var id = $(this).val();
-  e.preventDefault();
-  BILLING_GetBilling(id);
-});
+var idTransaksi = window.location.search.substr(1);
+BILLING_GetBilling(idTransaksi);
 
 $("button").click(function (e) {
   e.preventDefault();

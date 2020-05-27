@@ -44,11 +44,8 @@ var BILLING_GetInvoice = (proforma_invoice_no, url) => {
     });
 };
 
-$("#proforma_invoice_no").change(function (e) {
-  var id = $(this).val();
-  e.preventDefault();
-  BILLING_GetBillingDetail(id);
-});
+var idProforma = window.location.search.substr(1);
+BILLING_GetBillingDetail(idProforma);
 
 $("#download").click(function (e) {
   e.preventDefault();

@@ -234,6 +234,9 @@ var BILLING_ConfirmTransaction = () => {
       cntrId.map((container) => {
         storeStatusContainer(container, json.TRANSACTION_ID, 0);
       });
+      window.open(
+        `${window.location.origin}/billing.html?${json.TRANSACTION_ID}`
+      );
     });
 };
 

@@ -22,14 +22,23 @@ var BILLING_GetBilling = (transaction_id) => {
               `
               <tr>
                 <td>${indexOrKey}</td>
-                <td>${elementOrValue}</td>
+                <td>
+                ${elementOrValue}
+                ${
+                  indexOrKey == "LINK" || indexOrKey == "LINK_PRO"
+                    ? "<a target='_blank' href=" +
+                      elementOrValue +
+                      ">Download</a>"
+                    : ""
+                }
+                </td>
                 </tr>    
               `
             );
           });
         }
       });
-      window.location.href = `${window.location.origin}/proforma.html?${result.PROFORMA_INVOICE_NO}`;
+      // window.location.href = `${window.location.origin}/proforma.html?${result.PROFORMA_INVOICE_NO}`;
     });
 };
 

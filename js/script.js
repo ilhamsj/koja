@@ -181,6 +181,7 @@ var BILLING_ConfirmTransaction = () => {
   var paid_thru = $("#paid_thru").val();
   var bl_nbr = $("#bl_nbr").val();
   var document_no = $("#document_no").val();
+  var transactions_type_id = $("#transactionType").val();
 
   fetch(BILLING_ConfirmTransaction_url, {
     method: "POST",
@@ -189,7 +190,7 @@ var BILLING_ConfirmTransaction = () => {
       old_company_code: "",
       cust_id: "39161",
       iso_code: [""],
-      transactions_type_id: "1",
+      transactions_type_id: transactions_type_id,
       over_right: [""],
       document_shipping_no: bl_nbr,
       old_voyage_no: "",

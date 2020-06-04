@@ -10,16 +10,17 @@ var BILLING_GetBilling = (transaction_id) => {
   })
     .then((response) => response.json())
     .then((result) => {
-      console.log(result);
-      $.map(result, function (val, key) {
-        console.log(val);
-        $("#url").val(result.DETAIL_BILLING.LINK);
-        if (typeof val != "object") {
-          $("#details").append(`<b>${key}</b> ${val} <br/>`);
-        } else {
-          $.map(val, function (elementOrValue, indexOrKey) {
-            $("table > tbody").append(
-              `
+      if (result.STATUS == "FALSE") {
+        alert(`Id Transaksi ${transaction_id} tidak ditemukan`);
+      } else {
+        $.map(result, function (val, key) {
+          console.log(val);
+          if (typeof val != "object") {
+            $("table > body").append(`<b>${key}</b> ${val} <br/>`);
+          } else {
+            $.map(val, function (elementOrValue, indexOrKey) {
+              $("table > tbody").append(
+                `
               <tr>
                 <td>${indexOrKey}</td>
                 <td>
@@ -32,13 +33,13 @@ var BILLING_GetBilling = (transaction_id) => {
                     : ""
                 }
                 </td>
-                </tr>    
+                </tr>
               `
-            );
-          });
-        }
-      });
-      // window.location.href = `${window.location.origin}/proforma.html?${result.PROFORMA_INVOICE_NO}`;
+              );
+            });
+          }
+        });
+      }
     });
 };
 

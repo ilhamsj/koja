@@ -1,179 +1,428 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Buat Transaksi</title>
-    <!-- Bootstrap CSS -->
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Clickargo</title>
+    <meta
+      http-equiv="Cache-Control"
+      content="no-cache, no-store, must-revalidate"
+    />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <!-- Favicons -->
+
+    <link href="assets/dashboard/css/all.min.css" rel="stylesheet" />
+    <link href="assets/dashboard/css/ionicons.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="assets/dashboard/css/dashforge.css" />
     <link
       rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-      crossorigin="anonymous"
+      href="assets/dashboard/css/dashforge.dashboard.css"
+    />
+    <link rel="stylesheet" href="assets/dashboard/css/sweetalert2.min.css" />
+    <link rel="stylesheet" href="assets/dashboard/css/toastr.min.css" />
+    <link
+      rel="stylesheet"
+      href="assets/dashboard/css/jquery.dataTables.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="assets/dashboard/css/responsive.dataTables.min.css"
+    />
+    <link rel="stylesheet" href="assets/dashboard/css/custom.css" />
+    <link
+      rel="stylesheet"
+      href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"
     />
   </head>
+
   <body>
-    <div class="container">
-      <div class="row justify-content-center my-4">
-        <div class="col-sm-12 col-md-10">
-          <h1>Koja</h1>
-
-          <div class="form-group">
-            <label for="">Kategori Transaksi</label>
-            <select class="form-control" name="categoryId" id="categoryId">
-              <option value="E">Export</option>
-              <option value="I">Import</option>
-            </select>
-          </div>
-
-          <div class="form-group">
-            <label for="">Tipe Transaksi</label> <br />
-            <select
-              class="form-control"
-              name="transactionType"
-              id="transactionType"
-            >
-              <option value="">Tipe Transaksi</option>
-            </select>
-          </div>
-
-          <div class="form-group">
-            <label for="">No Dokumen Beacukai</label>
-            <input
-              type="text"
-              class="form-control"
-              name="document_no_beacukai"
-              id="document_no_beacukai"
-              aria-describedby="helpId"
-              placeholder=""
-            />
-          </div>
-
-          <div class="form-group">
-            <label for="">Jenis Dokumen</label> <br />
-            <select class="form-control" name="documentId" id="documentId">
-              <option value="">Pilih Jenis Dokumen</option>
-            </select>
-          </div>
-
-          <button
-            type="submit"
-            name=""
-            id="MAIN_GetDocumentCustomsNGen"
-            class="btn btn-primary"
+    <div class="d-flex justify-content-center loader d-none">
+      <div class="spinner-border" role="status">
+        <span class="sr-only">Loading...</span>
+      </div>
+    </div>
+    <div id="app">
+      <aside class="aside aside-fixed">
+        <div class="aside-header">
+          <!-- <a href="#" class="aside-logo">
+            <span>No Logo</span>
+          </a> -->
+          <a
+            href="http://elogistic.ms.demo-qs.xyz/backyard/dashboard"
+            class="aside-logo"
           >
-            Proses
-          </button>
-
-          <hr />
-          <div class="form-group">
-            <label for="">No D/O</label>
-            <input
-              type="text"
-              class="form-control"
-              name="document_no"
-              id="document_no"
-              aria-describedby="helpId"
-              placeholder="Document No"
-              readonly
+            <img
+              src="storage/uploads/settings/logoZw5JVp4Z3oLqCEFTYrEk.png"
+              alt=""
+              style="width: 120px;"
             />
+          </a>
+          <a href="" class="aside-menu-link">
+            <i data-feather="menu"></i>
+            <i data-feather="x"></i>
+          </a>
+        </div>
+        <div class="aside-body">
+          <div class="aside-loggedin">
+            <div class="aside-loggedin-user">
+              <a
+                href="#loggedinMenu"
+                class="d-flex align-items-center justify-content-between mg-b-2"
+                data-toggle="collapse"
+              >
+                <h6 class="tx-semibold mg-b-0">
+                  NAME
+                </h6>
+              </a>
+              <p class="tx-color-03 tx-12 mg-b-0">
+                COMPANY_NAME
+              </p>
+            </div>
+          </div>
+          <ul class="nav nav-aside">
+            <li class="nav-item">
+              <a href="#" class="nav-link">
+                <i class="fas fa-home"></i> Dashboard
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="#" class="nav-link">
+                <i class="fas fa-calendar-alt"></i> Find Shipment Schedule
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="#" class="nav-link">
+                <i class="fas fa-sign-out-alt"></i> Logout
+              </a>
+            </li>
+          </ul>
+        </div>
+      </aside>
+
+      <div class="content ht-100v pd-0">
+        <div class="content-header">
+          <h6>Dashboard</h6>
+        </div>
+        <div class="content-body" id="app">
+          <div class="container pd-x-0 pd-lg-x-10 pd-xl-x-0">
+            <div>
+              <nav aria-label="breadcrumb">
+                <ol class="breadcrumb breadcrumb-style1 mg-b-15">
+                  <li class="breadcrumb-item">
+                    <a href="/">Dashboard</a>
+                  </li>
+                  <li class="breadcrumb-item">
+                    <a href="/">Request</a>
+                  </li>
+                  <li class="breadcrumb-item active" aria-current="page">
+                    IMPORT
+                  </li>
+                </ol>
+              </nav>
+              <h4 class="mg-b-0 tx-spacing--1">SP2</h4>
+            </div>
+          </div>
+          <div class="card mg-t-50">
+            <div class="card-header">
+              Claim SP2
+            </div>
+            <div class="card-body">
+              <div class="form-group">
+                <label for=""
+                  >Action type <span class="text-danger">*</span></label
+                >
+                <select class="form-control" name="categoryId" id="categoryId">
+                  <option value="">Select action type</option>
+                  <option value="E">Export</option>
+                  <option value="I">Import</option>
+                </select>
+              </div>
+
+              <hr />
+
+              <div class="form-group">
+                <label for=""
+                  >Transaction Type <span class="text-danger">*</span></label
+                >
+                <br />
+                <select
+                  class="form-control"
+                  name="transactionType"
+                  id="transactionType"
+                >
+                  <option value="">Select Transaction Type</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for=""
+                  >Document Type <span class="text-danger">*</span></label
+                >
+                <br />
+                <select class="form-control" name="documentId" id="documentId">
+                  <option value="">Select Document Type</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for=""
+                  >No Document <span class="text-danger">*</span></label
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  name="document_no_beacukai"
+                  id="document_no_beacukai"
+                  aria-describedby="helpId"
+                  placeholder="No Document"
+                />
+              </div>
+
+              <div class="form-group">
+                <label for="">D/O Shipping Date</label>
+                <input
+                  type="date"
+                  class="form-control"
+                  name="document_shipping_date"
+                  id="document_shipping_date"
+                  aria-describedby="helpId"
+                  required
+                />
+              </div>
+
+              <hr />
+
+              <div class="form-group">
+                <label for=""
+                  >Terminal Operator <span class="text-danger">*</span></label
+                >
+                <select class="form-control" name="" id="">
+                  <option value="">Select terminal operator</option>
+                  <option value="koja">Koja</option>
+                </select>
+              </div>
+
+              <hr />
+
+              <button
+                type="submit"
+                name=""
+                id="MAIN_GetDocumentCustomsNGen"
+                class="btn btn-primary"
+              >
+                Process
+              </button>
+            </div>
           </div>
 
-          <div class="form-group">
-            <label for="">Shipping Date D/O</label>
-            <input
-              type="date"
-              class="form-control"
-              name="document_shipping_date"
-              id="document_shipping_date"
-              aria-describedby="helpId"
-              required
-            />
+          <div class="card mg-t-50" id="generate_container">
+            <div class="card-body">
+              <div class="form-group">
+                <label for="">No D/O <span class="text-danger">*</span></label>
+                <input
+                  type="text"
+                  class="form-control"
+                  name="document_no"
+                  id="document_no"
+                  aria-describedby="helpId"
+                  placeholder="Document No"
+                />
+              </div>
+              <div class="form-group">
+                <label for=""> BL No <span class="text-danger">*</span></label>
+                <input
+                  type="text"
+                  class="form-control"
+                  name="bl_nbr"
+                  id="bl_nbr"
+                  aria-describedby="helpId"
+                  placeholder="BL No"
+                />
+              </div>
+              <div class="form-group">
+                <label for=""> D/O PIN</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  name="pin"
+                  id="pin"
+                  aria-describedby="helpId"
+                  placeholder="Do PIN"
+                />
+              </div>
+
+              <!-- Batas pembayaran -->
+              <div class="form-group">
+                <label for="">Paid Thru</label>
+                <input
+                  type="date"
+                  class="form-control"
+                  name="paid_thru"
+                  id="paid_thru"
+                  aria-describedby="helpId"
+                />
+                <small id="helpId" class="form-text text-muted"
+                  >Tanggal keluar kontainer, *Optional untuk export</small
+                >
+              </div>
+
+              <table class="table table-bordered table-responsive">
+                <thead>
+                  <tr>
+                    <th></th>
+                    <th>NO_MASTER_BL_AWB</th>
+                    <th>STATUS_CONT_SPPB</th>
+                    <th>SENDER</th>
+                    <th>VESSEL_ID</th>
+                    <th>VOYAGE_NO</th>
+                    <th>VESSEL_NAME</th>
+                    <th>ETA</th>
+                    <th>ATA</th>
+                    <th>ETD</th>
+                    <th>LINE_ID</th>
+                    <th>NO_CONT</th>
+                    <th>CNTR_SIZE</th>
+                    <th>CNTR_TYPE</th>
+                    <th>LS_LOCATION_TYPE</th>
+                    <th>STACKING_DATE</th>
+                    <th>OWNER</th>
+                    <th>REEFER_IN_REFIGERATION_INDR</th>
+                    <th>REQUIRED_RFR_TEMPERATURE</th>
+                    <th>REQUIRED_RFR_VOLTAGE</th>
+                    <th>STATUS_KARANTINA</th>
+                    <th>STATUS_PAID</th>
+                  </tr>
+                </thead>
+                <tbody></tbody>
+              </table>
+
+              <div class="form-group">
+                <label for="">PM_ID <span class="text-danger">*</span></label>
+                <select class="form-control" name="PM_ID" id="PM_ID">
+                  <option value="">Select PM_ID</option>
+                  <option value="A">AR</option>
+                  <option value="C">CASH</option>
+                </select>
+              </div>
+
+              <button
+                type="submit"
+                name=""
+                id="confirmTransaction"
+                class="btn btn-primary"
+              >
+                Proses
+              </button>
+            </div>
           </div>
 
-          <div class="form-group">
-            <label for=""> Jatuh Tempo D/O </label>
-            <input
-              type="date"
-              class="form-control"
-              name="do_expired"
-              id="do_expired"
-              aria-describedby="helpId"
-              readonly
-            />
-          </div>
-
-          <div class="form-group">
-            <label for="">BL Number</label>
-            <input
-              type="text"
-              class="form-control"
-              name="bl_nbr"
-              id="bl_nbr"
-              placeholder="BL NUMBER"
-              readonly
-              aria-describedby="helpId"
-            />
-          </div>
-
-          <h3>Container</h3>
-
-          <div class="form-group">
-            <label for="">Paid Thru </label>
-            <input
-              type="date"
-              class="form-control"
-              name="paid_thru"
-              id="paid_thru"
-              aria-describedby="helpId"
-            />
-            <small id="helpId" class="form-text text-muted"
-              >Tanggal keluar kontainer, *Optional untuk export</small
-            >
-          </div>
-
-          <table class="table table-bordered">
-            <thead>
-              <tr>
-                <th></th>
-                <th>CONTAINER ID</th>
-                <th>SIZE/TYPE</th>
-                <th>STATUS</th>
-                <th>LOCATION TYPE</th>
-                <th>STACK</th>
-              </tr>
-            </thead>
-            <tbody></tbody>
-          </table>
-
-          <button
-            type="submit"
-            name=""
-            id="confirmTransaction"
-            class="btn btn-primary"
+          <div
+            class="modal fade"
+            id="modalForm"
+            tabindex="-1"
+            role="dialog"
+            aria-labelledby="exampleModalLabel"
+            aria-hidden="true"
           >
-            Proses
-          </button>
+            <div class="modal-dialog" role="document">
+              <div class="modal-content tx-14">
+                <form
+                  method="POST"
+                  action="http://elogistic.ms.demo-qs.xyz/backyard/setting/sftp"
+                  accept-charset="UTF-8"
+                  id="form"
+                >
+                  <input
+                    name="_token"
+                    type="hidden"
+                    value="gjkyErlZBC0zJy551IIenNwoBOp27MoJkUBMIfCe"
+                  />
+                  <input id="method" name="method" type="hidden" value="POST" />
+                  <input id="uuid" name="uuid" type="hidden" />
+                  <input id="id" name="id" type="hidden" />
+                  <div class="modal-header">
+                    <h6 class="modal-title" id="exampleModalLabel">
+                      Order Status Form
+                    </h6>
+                    <button
+                      type="button"
+                      class="close"
+                      data-dismiss="modal"
+                      aria-label="Close"
+                    >
+                      <span aria-hidden="true">×</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <div class="form-group">
+                      <label for=""
+                        >Username<span class="tx-danger">*</span></label
+                      >
+                      <input
+                        class="form-control"
+                        required=""
+                        data-parsley-pattern="^[a-zA-Z\s]*$"
+                        id="userid"
+                        name="userid"
+                        type="text"
+                      />
+                    </div>
+                    <div class="form-group">
+                      <label for=""
+                        >Password<span class="tx-danger">*</span></label
+                      >
+                      <input
+                        class="form-control"
+                        required=""
+                        id="password"
+                        name="password"
+                        type="password"
+                        value=""
+                      />
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button
+                      type="button"
+                      class="btn btn-secondary tx-13"
+                      data-dismiss="modal"
+                    >
+                      Close
+                    </button>
+                    <button type="submit" class="btn btn-primary tx-13">
+                      Submit
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script
-      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-      crossorigin="anonymous"
-    ></script>
+
+    <script src="assets/dashboard/js/jquery.min.js"></script>
+    <script src="assets/dashboard/js/jquery-ui.min.js"></script>
+    <script src="assets/dashboard/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/dashboard/js/feather.min.js"></script>
+    <script src="assets/dashboard/js/perfect-scrollbar.min.js"></script>
+    <script src="assets/dashboard/js/prism.js"></script>
+    <script src="assets/dashboard/js/dashforge.js"></script>
+    <script src="assets/dashboard/js/dashforge.aside.js"></script>
+    <script src="assets/dashboard/js/sweetalert2.all.min.js"></script>
+    <script src="assets/dashboard/js/jquery.dataTables.min.js"></script>
+    <script src="assets/dashboard/js/dataTables.dataTables.min.js"></script>
+    <script src="assets/dashboard/js/dataTables.responsive.min.js"></script>
+    <script src="assets/dashboard/js/responsive.dataTables.min.js"></script>
+    <script src="assets/dashboard/js/parsley.min.js"></script>
+    <script src="assets/dashboard/js/toastr.min.js"></script>
+    <!-- append theme customizer -->
+    <script src="assets/dashboard/js/js.cookie.js"></script>
     <script src="js/url.js"></script>
     <script src="js/script.js"></script>
   </body>

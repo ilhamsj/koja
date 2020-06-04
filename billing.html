@@ -1,48 +1,167 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Detail Proforma</title>
-    <!-- Bootstrap CSS -->
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Clickargo</title>
+    <meta
+      http-equiv="Cache-Control"
+      content="no-cache, no-store, must-revalidate"
+    />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <!-- Favicons -->
+
+    <link href="assets/dashboard/css/all.min.css" rel="stylesheet" />
+    <link href="assets/dashboard/css/ionicons.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="assets/dashboard/css/dashforge.css" />
     <link
       rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-      crossorigin="anonymous"
+      href="assets/dashboard/css/dashforge.dashboard.css"
+    />
+    <link rel="stylesheet" href="assets/dashboard/css/sweetalert2.min.css" />
+    <link rel="stylesheet" href="assets/dashboard/css/toastr.min.css" />
+    <link
+      rel="stylesheet"
+      href="assets/dashboard/css/jquery.dataTables.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="assets/dashboard/css/responsive.dataTables.min.css"
+    />
+    <link rel="stylesheet" href="assets/dashboard/css/custom.css" />
+    <link
+      rel="stylesheet"
+      href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"
     />
   </head>
+
   <body>
-    <div class="container">
-      <div class="row">
-        <div class="col-12">
-          <h1>Detail Proforma</h1>
+    <div class="d-flex justify-content-center loader d-none">
+      <div class="spinner-border" role="status">
+        <span class="sr-only">Loading...</span>
+      </div>
+    </div>
+    <div id="app">
+      <aside class="aside aside-fixed">
+        <div class="aside-header">
+          <!-- <a href="#" class="aside-logo">
+            <span>No Logo</span>
+          </a> -->
+          <a
+            href="http://elogistic.ms.demo-qs.xyz/backyard/dashboard"
+            class="aside-logo"
+          >
+            <img
+              src="storage/uploads/settings/logoZw5JVp4Z3oLqCEFTYrEk.png"
+              alt=""
+              style="width: 120px;"
+            />
+          </a>
+          <a href="" class="aside-menu-link">
+            <i data-feather="menu"></i>
+            <i data-feather="x"></i>
+          </a>
         </div>
-        <div class="col-12" id="details"></div>
-        <div class="col-12" id="table">
-          <table class="table table-bordered">
-            <tbody></tbody>
-          </table>
+        <div class="aside-body">
+          <div class="aside-loggedin">
+            <div class="aside-loggedin-user">
+              <a
+                href="#loggedinMenu"
+                class="d-flex align-items-center justify-content-between mg-b-2"
+                data-toggle="collapse"
+              >
+                <h6 class="tx-semibold mg-b-0">
+                  NAME
+                </h6>
+              </a>
+              <p class="tx-color-03 tx-12 mg-b-0">
+                COMPANY_NAME
+              </p>
+            </div>
+          </div>
+          <ul class="nav nav-aside">
+            <li class="nav-item">
+              <a href="#" class="nav-link">
+                <i class="fas fa-home"></i> Dashboard
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="#" class="nav-link">
+                <i class="fas fa-calendar-alt"></i> Find Shipment Schedule
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="#" class="nav-link">
+                <i class="fas fa-sign-out-alt"></i> Logout
+              </a>
+            </li>
+          </ul>
+        </div>
+      </aside>
+
+      <div class="content ht-100v pd-0">
+        <div class="content-header">
+          <h6>Dashboard</h6>
+        </div>
+        <div class="content-body" id="app">
+          <div class="container pd-x-0 pd-lg-x-10 pd-xl-x-0">
+            <div>
+              <nav aria-label="breadcrumb">
+                <ol class="breadcrumb breadcrumb-style1 mg-b-15">
+                  <li class="breadcrumb-item">
+                    <a href="http://elogistic.ms.demo-qs.xyz/backyard/dashboard"
+                      >Dashboard</a
+                    >
+                  </li>
+                  <li class="breadcrumb-item">
+                    <a href="http://elogistic.ms.demo-qs.xyz/backyard/dashboard"
+                      >Billing</a
+                    >
+                  </li>
+                  <li class="breadcrumb-item active" aria-current="page">
+                    1234
+                  </li>
+                </ol>
+              </nav>
+              <h4 class="mg-b-0 tx-spacing--1">Koja</h4>
+            </div>
+          </div>
+          <div class="card mg-t-50">
+            <div class="card-header">
+              Billing
+            </div>
+            <div class="card-body">
+              <table class="table table-bordered">
+                <tbody></tbody>
+              </table>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script
-      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-      crossorigin="anonymous"
-    ></script>
+
+    <script src="assets/dashboard/js/jquery.min.js"></script>
+    <script src="assets/dashboard/js/jquery-ui.min.js"></script>
+    <script src="assets/dashboard/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/dashboard/js/feather.min.js"></script>
+    <script src="assets/dashboard/js/perfect-scrollbar.min.js"></script>
+    <script src="assets/dashboard/js/prism.js"></script>
+    <script src="assets/dashboard/js/dashforge.js"></script>
+    <script src="assets/dashboard/js/dashforge.aside.js"></script>
+    <script src="assets/dashboard/js/sweetalert2.all.min.js"></script>
+    <script src="assets/dashboard/js/jquery.dataTables.min.js"></script>
+    <script src="assets/dashboard/js/dataTables.dataTables.min.js"></script>
+    <script src="assets/dashboard/js/dataTables.responsive.min.js"></script>
+    <script src="assets/dashboard/js/responsive.dataTables.min.js"></script>
+    <script src="assets/dashboard/js/parsley.min.js"></script>
+    <script src="assets/dashboard/js/toastr.min.js"></script>
+    <!-- append theme customizer -->
+    <script src="assets/dashboard/js/js.cookie.js"></script>
     <script src="js/url.js"></script>
     <script src="js/billing.js"></script>
   </body>

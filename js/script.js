@@ -147,7 +147,7 @@ var MAIN_GetDocumentCustomsNGen = (CUST_ID_PPJK, terminal_id) => {
         $("table > tbody > tr").remove();
         alert(json.MESSAGE);
       } else {
-        var document_no = json.NO_SPPB[0];
+        var document_no = json.NO_BL_AWB[0];
         var bl_nbr = json.NO_BL_AWB[0];
         $("#document_no").val(document_no);
         $("#bl_nbr").val(bl_nbr);
@@ -163,11 +163,27 @@ var MAIN_GetDocumentCustomsNGen = (CUST_ID_PPJK, terminal_id) => {
             <td><input type="checkbox" name="" id="${json.NO_CONT[i]}" ${
               json.STATUS_PAID[i] == "VALID" ? "" : "disabled"
             }/></td>
-            <td>${json.NO_CONT[i]}</td>
-            <td>${json.CNTR_SIZE[i]} / ${json.CNTR_TYPE[i]} </td>
-            <td>${json.STATUS_PAID[i]} </td>
+            <td>${json.NO_MASTER_BL_AWB[i]} </td>
+            <td>${json.STATUS_CONT_SPPB[i]} </td>
+            <td>${json.SENDER[i]} </td>
+            <td>${json.VESSEL_ID[i]} </td>
+            <td>${json.VOYAGE_NO[i]} </td>
+            <td>${json.VESSEL_NAME[i]} </td>
+            <td>${json.ETA[i]} </td>
+            <td>${json.ATA[i]} </td>
+            <td>${json.ETD[i]} </td>
+            <td>${json.LINE_ID[i]} </td>
+            <td>${json.NO_CONT[i]} </td>
+            <td>${json.CNTR_SIZE[i]} </td>
+            <td>${json.CNTR_TYPE[i]} </td>
             <td>${json.LS_LOCATION_TYPE[i]} </td>
             <td>${json.STACKING_DATE[i]} </td>
+            <td>${json.OWNER[i]} </td>
+            <td>${json.REEFER_IN_REFIGERATION_INDR[i]} </td>
+            <td>${json.REQUIRED_RFR_TEMPERATURE[i]} </td>
+            <td>${json.REQUIRED_RFR_VOLTAGE[i]} </td>
+            <td>${json.STATUS_KARANTINA[i]} </td>
+            <td>${json.STATUS_PAID[i]} </td>
           </tr>`);
           }
         }
@@ -188,7 +204,7 @@ var BILLING_ConfirmTransaction = () => {
     body: JSON.stringify({
       certificated_id: [""],
       old_company_code: "",
-      cust_id: "39161",
+      // cust_id: get data from db
       iso_code: [""],
       transactions_type_id: transactions_type_id,
       over_right: [""],

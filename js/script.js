@@ -359,8 +359,8 @@ var storeStatusContainer = (container, invoice, proforma) => {
 $("#documentId").change(function (e) {
   e.preventDefault();
   var docId = $("option:selected", this).text();
-  $("#document_no_beacukai").attr("placeholder", `No document ${docId}`);
-  $("#label_document_no_beacukai").text(`No document ${docId}`);
+  $("#document_no_beacukai").attr("placeholder", `No ${docId}`);
+  $("#label_document_no_beacukai").text(`No ${docId}`);
 });
 
 $(".card:first > .card-header").click(function (e) {

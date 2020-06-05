@@ -1,8 +1,13 @@
 var CUST_ID_PPJK = null; // from response login
 var groupId = 6;
 var terminalId = "KOJA";
+
+// from response customngen
 var cntrId = [];
-var CUST_ID = []; // from response customngen
+var CUST_ID = [];
+var containerOwner = [];
+var voyageNo = [];
+var vesselId = [];
 
 $("#categoryId").change(function (e) {
   e.preventDefault();
@@ -19,19 +24,31 @@ $("#MAIN_GetDocumentCustomsNGen").click(function (e) {
 $("table").on("change", "input", function () {
   var data = $(this).attr("id");
   var custId = $(this).attr("data-custId");
+  var dataContainerOwner = $(this).attr("data-containerOwner");
+  var dataVoyageNo = $(this).attr("data-voyageNo");
+  var dataVesselId = $(this).attr("data-vesselId");
 
   if (this.checked) {
     cntrId.push(data);
     CUST_ID.push(custId);
+    containerOwner.push(dataContainerOwner);
+    voyageNo.push(dataVoyageNo);
+    vesselId.push(dataVesselId);
   } else {
     const index = cntrId.indexOf(data);
     if (index > -1) {
       cntrId.splice(index, 1);
       CUST_ID.splice(index, 1);
+      containerOwner.splice(index, 1);
+      voyageNo.splice(index, 1);
+      vesselId.splice(index, 1);
     }
   }
   console.log(cntrId);
   console.log(CUST_ID);
+  console.log(containerOwner);
+  console.log(voyageNo);
+  console.log(vesselId);
 });
 
 $("#confirmTransaction").click(function (e) {
@@ -168,11 +185,15 @@ var MAIN_GetDocumentCustomsNGen = (CUST_ID_PPJK, terminal_id) => {
           $("table > tbody > tr").remove();
           for (let i = 0; i < json.NO_CONT.length; i++) {
             $("table > tbody").append(`<tr>
-            <td><input type="checkbox" name="" data-custId="${
-              json.CUST_ID[i]
-            }" id="${json.NO_CONT[i]}" ${
+            <td><input type="checkbox" name="" 
+            data-voyageNo="${json.VOYAGE_NO[i]}" 
+            data-vesselId="${json.VESSEL_ID[i]}" 
+            data-containerOwner="${json.OWNER[i]}" 
+            data-custId="${json.CUST_ID[i]}" 
+            id="${json.NO_CONT[i]}" ${
               json.STATUS_PAID[i] == "VALID" ? "" : "disabled"
-            }/></td>
+            }/>
+            </td>
             <td>${json.NO_MASTER_BL_AWB[i]} </td>
             <td>${json.STATUS_CONT_SPPB[i]} </td>
             <td>${json.SENDER[i]} </td>
@@ -204,63 +225,80 @@ var MAIN_GetDocumentCustomsNGen = (CUST_ID_PPJK, terminal_id) => {
 var BILLING_ConfirmTransaction = () => {
   //
   var document_shipping_date = $("#document_shipping_date").val();
+  var document_date = $("#document_date").val();
   var paid_thru = $("#paid_thru").val();
+
   var bl_nbr = $("#bl_nbr").val();
   var document_no = $("#document_no").val();
   var transactions_type_id = $("#transactionType").val();
+  var customs_document_id = $("#documentId").val();
 
   fetch(BILLING_ConfirmTransaction_url, {
     method: "POST",
     body: JSON.stringify({
-      certificated_id: [""],
-      old_company_code: "",
-      cust_id: CUST_ID[0], // request koja string bukan array
-      // EMAIL_REQ -> dari auth login
-      iso_code: [""],
+      cust_id: CUST_ID[0],
+      pm_id: "C", // A/C
+      // email_req: "",
+      // phone_req: "",
+      cust_id_req: null,
+      cust_id_ppjk: "",
+      queue_counter_id: "",
+
       transactions_type_id: transactions_type_id,
-      over_right: [""],
+      customs_document_id: customs_document_id,
+
+      document_no: document_no,
+      document_date: document_date,
       document_shipping_no: bl_nbr,
-      old_voyage_no: "",
-      start_plug: [],
-      over_left: [""],
-      owner: ["KOJA"],
-      pm_id: "A",
       document_shipping_date: document_shipping_date,
-      voyage_no: "001",
-      company_code: "KOJA",
+
+      no_bl_awb: bl_nbr,
+      paid_thru: paid_thru,
+
+      no_cont: cntrId,
+      owner: containerOwner,
+
+      iso_code: [""],
       weight: [""],
-      certificated_pic: [""],
-      old_vessel_id: "",
       imo_code: [""],
       un_number: [""],
-      vessel_id: "DUMMYK",
-      pod: [""],
-      cust_sertificated: [""],
-      document_date: "20180822",
+
+      start_plug: [""],
       stop_plug: [""],
-      cust_id_ppjk: "",
-      pol: [""],
-      old_invoice_no: "",
-      fd: [""],
-      no_cont: cntrId,
+
       refeer_temperature: [""],
       voltage_plug: [""],
-      tgl_nhi: "",
-      old_pod: [""],
-      customs_document_id: "1",
-      no_bl_awb: bl_nbr,
-      weight_vgm: [""],
-      old_no_cont: [""],
-      npwp_sertificated: [""],
-      document_no: document_no,
-      old_fd: [""],
+
+      over_right: [""],
+      over_left: [""],
       over_front: [""],
       over_back: [""],
-      paid_thru: paid_thru,
-      tgl_bk_segel_nhi: "",
-      queue_counter_id: "",
-      cust_id_req: null,
       over_height: [""],
+
+      pol: [""],
+      pod: [""],
+      fd: [""],
+
+      voyage_no: "001",
+      vessel_id: "DUMMYK",
+      company_code: "KOJA",
+      old_no_cont: [""],
+
+      old_pod: [""],
+      old_fd: [""],
+      old_voyage_no: "",
+      old_vessel_id: "",
+      old_company_code: "",
+
+      certificated_id: [""],
+      certificated_pic: [""],
+      cust_sertificated: [""],
+      npwp_sertificated: [""],
+
+      old_invoice_no: "",
+      tgl_nhi: "",
+      tgl_bk_segel_nhi: "",
+      weight_vgm: [""],
     }),
     headers: {
       "Content-type": "application/json; charset=UTF-8",

@@ -1,7 +1,8 @@
-var CUST_ID_PPJK = 7407;
+var CUST_ID_PPJK = null; // from response login
 var groupId = 6;
 var terminalId = "KOJA";
 var cntrId = [];
+var CUST_ID = []; // from response customngen
 
 $("#categoryId").change(function (e) {
   e.preventDefault();
@@ -17,23 +18,27 @@ $("#MAIN_GetDocumentCustomsNGen").click(function (e) {
 
 $("table").on("change", "input", function () {
   var data = $(this).attr("id");
+  var custId = $(this).attr("data-custId");
 
   if (this.checked) {
     cntrId.push(data);
+    CUST_ID.push(custId);
   } else {
     const index = cntrId.indexOf(data);
     if (index > -1) {
       cntrId.splice(index, 1);
+      CUST_ID.splice(index, 1);
     }
   }
   console.log(cntrId);
+  console.log(CUST_ID);
 });
 
 $("#confirmTransaction").click(function (e) {
   e.preventDefault();
   var categoryId = $("#categoryId").val();
   if (cntrId.length == 0) {
-    alert("please select");
+    alert("please select container");
   } else if (categoryId == "I") {
     var paid_thru = $("#paid_thru").val();
     console.log(paid_thru);
@@ -66,7 +71,7 @@ var MAIN_GetTransactionsType = (groupId, categoryId, terminalId) => {
     .then((response) => response.json())
     .then((json) => {
       console.log(json);
-      $("#transactionType > option").remove();
+      $("#transactionType > option").not(":first").remove();
       for (let i = 0; i < json.TRANSACTIONS_NAME.length; i++) {
         $("#transactionType").append(
           `<option value="${json.TRANSACTIONS_TYPE_ID[i]}">${json.TRANSACTIONS_NAME[i]}</option>`
@@ -89,10 +94,10 @@ var MAIN_GetDocCodeCustoms = (groupId, categoryId) => {
     .then((response) => response.json())
     .then((json) => {
       console.log(json);
-      $("#documentId > option").remove();
+      $("#documentId > option").not(":first").remove();
       for (let i = 0; i < json.CUSTOMS_DOCUMENT_NAME.length; i++) {
         $("#documentId").append(
-          `<option value="${json.CUSTOMS_DOCUMENT_ID[i]}">${json.CUSTOMS_DOCUMENT_NAME[i]}</option>`
+          `<option value="${json.CUSTOMS_DOCUMENT_ID[i]}" data-document="${json.CUSTOMS_DOCUMENT_NAME[i]}">${json.CUSTOMS_DOCUMENT_NAME[i]}</option>`
         );
       }
     });
@@ -147,6 +152,9 @@ var MAIN_GetDocumentCustomsNGen = (CUST_ID_PPJK, terminal_id) => {
         $("table > tbody > tr").remove();
         alert(json.MESSAGE);
       } else {
+        $("#select_container").removeClass("collapse");
+        $(".card:first > .card-body").addClass("collapse");
+
         var document_no = json.NO_BL_AWB[0];
         var bl_nbr = json.NO_BL_AWB[0];
         $("#document_no").val(document_no);
@@ -160,7 +168,9 @@ var MAIN_GetDocumentCustomsNGen = (CUST_ID_PPJK, terminal_id) => {
           $("table > tbody > tr").remove();
           for (let i = 0; i < json.NO_CONT.length; i++) {
             $("table > tbody").append(`<tr>
-            <td><input type="checkbox" name="" id="${json.NO_CONT[i]}" ${
+            <td><input type="checkbox" name="" data-custId="${
+              json.CUST_ID[i]
+            }" id="${json.NO_CONT[i]}" ${
               json.STATUS_PAID[i] == "VALID" ? "" : "disabled"
             }/></td>
             <td>${json.NO_MASTER_BL_AWB[i]} </td>
@@ -204,7 +214,8 @@ var BILLING_ConfirmTransaction = () => {
     body: JSON.stringify({
       certificated_id: [""],
       old_company_code: "",
-      // cust_id: get data from db
+      cust_id: CUST_ID[0], // request koja string bukan array
+      // EMAIL_REQ -> dari auth login
       iso_code: [""],
       transactions_type_id: transactions_type_id,
       over_right: [""],
@@ -213,7 +224,7 @@ var BILLING_ConfirmTransaction = () => {
       start_plug: [],
       over_left: [""],
       owner: ["KOJA"],
-      pm_id: "C",
+      pm_id: "A",
       document_shipping_date: document_shipping_date,
       voyage_no: "001",
       company_code: "KOJA",
@@ -320,3 +331,16 @@ var storeStatusContainer = (container, invoice, proforma) => {
       console.log(json);
     });
 };
+
+$("#documentId").change(function (e) {
+  e.preventDefault();
+  var docId = $("option:selected", this).text();
+  $("#document_no_beacukai").attr("placeholder", `No document ${docId}`);
+  $("#label_document_no_beacukai").text(`No document ${docId}`);
+});
+
+$(".card:first > .card-header").click(function (e) {
+  e.preventDefault();
+  $(this).next().removeClass("collapse");
+  $("#select_container").addClass("collapse");
+});

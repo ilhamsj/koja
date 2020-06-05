@@ -1,6 +1,6 @@
-const host = "http://localhost:8012/api/v1";
-// const host =
-//   "https://cors-anywhere.herokuapp.com/http://elogistic.ms.demo-qs.xyz:8010/api/v1";
+// const host = "http://localhost:8012/api/v1";
+const host =
+  "https://cors-anywhere.herokuapp.com/http://elogistic.ms.demo-qs.xyz:8010/api/v1";
 
 var MAIN_GetTransactionsType_Url = `${host}/transaction`;
 var MAIN_GetDocCodeCustoms_url = `${host}/document`;

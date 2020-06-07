@@ -8,6 +8,7 @@ var CUST_ID = [];
 var containerOwner = [];
 var voyageNo = [];
 var vesselId = [];
+var lineId = []; // company code
 
 $("#categoryId").change(function (e) {
   e.preventDefault();
@@ -27,6 +28,7 @@ $("table").on("change", "input", function () {
   var dataContainerOwner = $(this).attr("data-containerOwner");
   var dataVoyageNo = $(this).attr("data-voyageNo");
   var dataVesselId = $(this).attr("data-vesselId");
+  var dataLineId = $(this).attr("data-lineId");
 
   if (this.checked) {
     cntrId.push(data);
@@ -34,6 +36,7 @@ $("table").on("change", "input", function () {
     containerOwner.push(dataContainerOwner);
     voyageNo.push(dataVoyageNo);
     vesselId.push(dataVesselId);
+    lineId.push(dataLineId);
   } else {
     const index = cntrId.indexOf(data);
     if (index > -1) {
@@ -42,6 +45,7 @@ $("table").on("change", "input", function () {
       containerOwner.splice(index, 1);
       voyageNo.splice(index, 1);
       vesselId.splice(index, 1);
+      lineId.splice(index, 1);
     }
   }
   console.log(cntrId);
@@ -49,6 +53,7 @@ $("table").on("change", "input", function () {
   console.log(containerOwner);
   console.log(voyageNo);
   console.log(vesselId);
+  console.log(lineId);
 });
 
 $("#confirmTransaction").click(function (e) {
@@ -147,15 +152,15 @@ var MAIN_GetDocumentCustomsNGen = (CUST_ID_PPJK, terminal_id) => {
   fetch(MAIN_GetDocumentCustomsNGen_url, {
     method: "POST",
     body: JSON.stringify({
-      npwp_depo: "",
-      document_no: document_no_beacukai,
-      customs_document_id: customs_document_id,
-      transactions_type_id: transactions_type_id,
-      document_shipping_date: "",
-      document_date: "",
-      document_shipping_no: "",
       cust_id_ppjk: CUST_ID_PPJK,
+      customs_document_id: customs_document_id,
+      document_date: "",
+      document_no: document_no_beacukai,
+      document_shipping_date: "",
+      document_shipping_no: "",
+      npwp_depo: "",
       terminal_id: terminal_id,
+      transactions_type_id: transactions_type_id,
     }),
     headers: {
       "Content-type": "application/json; charset=UTF-8",
@@ -186,6 +191,7 @@ var MAIN_GetDocumentCustomsNGen = (CUST_ID_PPJK, terminal_id) => {
           for (let i = 0; i < json.NO_CONT.length; i++) {
             $("table > tbody").append(`<tr>
             <td><input type="checkbox" name="" 
+            data-lineId="${json.LINE_ID[i]}" 
             data-voyageNo="${json.VOYAGE_NO[i]}" 
             data-vesselId="${json.VESSEL_ID[i]}" 
             data-containerOwner="${json.OWNER[i]}" 
@@ -237,54 +243,53 @@ var BILLING_ConfirmTransaction = () => {
     method: "POST",
     body: JSON.stringify({
       certificated_id: [""],
-      old_company_code: "",
-      cust_id: CUST_ID[0], // request koja string bukan array
-      // EMAIL_REQ -> dari auth login
-      iso_code: [""],
-      transactions_type_id: transactions_type_id,
-      over_right: [""],
-      document_shipping_no: bl_nbr,
-      old_voyage_no: "",
-      start_plug: [],
-      over_left: [""],
-      owner: containerOwner,
-      pm_id: "A",
-      document_shipping_date: document_shipping_date,
-      voyage_no: "001",
-      company_code: "KOJA",
-      weight: [""],
       certificated_pic: [""],
-      old_vessel_id: "",
-      imo_code: [""],
-      un_number: [""],
-      vessel_id: "DUMMYK",
-      pod: [""],
-      cust_sertificated: [""],
-      document_date: "20180822",
-      stop_plug: [""],
+      company_code: lineId[0],
+      cust_id: CUST_ID[0], // request koja string bukan array
       cust_id_ppjk: "",
-      pol: [""],
-      old_invoice_no: "",
-      fd: [""],
-      no_cont: cntrId,
-      refeer_temperature: [""],
-      voltage_plug: [""],
-      tgl_nhi: "",
-      old_pod: [""],
-      customs_document_id: "1",
-      no_bl_awb: bl_nbr,
-      weight_vgm: [""],
-      old_no_cont: [""],
-      npwp_sertificated: [""],
-      document_no: document_no,
-      old_fd: [""],
-      over_front: [""],
-      over_back: [""],
-      paid_thru: paid_thru,
-      tgl_bk_segel_nhi: "",
-      queue_counter_id: "",
       cust_id_req: null,
+      cust_sertificated: [""],
+      customs_document_id: customs_document_id,
+      document_date: document_date,
+      document_no: document_no,
+      document_shipping_date: document_shipping_date,
+      document_shipping_no: bl_nbr,
+      fd: [""],
+      imo_code: [""],
+      iso_code: [""],
+      no_bl_awb: bl_nbr,
+      no_cont: cntrId,
+      npwp_sertificated: [""],
+      old_company_code: "",
+      old_fd: [""],
+      old_invoice_no: "",
+      old_no_cont: [""],
+      old_pod: [""],
+      old_vessel_id: "",
+      old_voyage_no: "",
+      over_back: [""],
+      over_front: [""],
       over_height: [""],
+      over_left: [""],
+      over_right: [""],
+      owner: containerOwner,
+      paid_thru: paid_thru,
+      pm_id: "A", // koja internal
+      pod: [""],
+      pol: [""],
+      queue_counter_id: "",
+      refeer_temperature: [""],
+      start_plug: [],
+      stop_plug: [""],
+      tgl_bk_segel_nhi: "",
+      tgl_nhi: "",
+      transactions_type_id: transactions_type_id,
+      un_number: [""],
+      vessel_id: vesselId[0],
+      voltage_plug: [""],
+      voyage_no: voyageNo[0],
+      weight: [""],
+      weight_vgm: [""],
     }),
     headers: {
       "Content-type": "application/json; charset=UTF-8",
@@ -360,7 +365,7 @@ $("#documentId").change(function (e) {
   e.preventDefault();
   var docId = $("option:selected", this).text();
   $("#document_no_beacukai").attr("placeholder", `No ${docId}`);
-  $("#label_document_no_beacukai").text(`No ${docId}`);
+  $(".label_document").text(`${docId}`);
 });
 
 $(".card:first > .card-header").click(function (e) {

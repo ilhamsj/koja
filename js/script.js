@@ -149,6 +149,8 @@ var MAIN_GetDocumentCustomsNGen = (CUST_ID_PPJK, terminal_id) => {
   var customs_document_id = $("#documentId").val();
   var transactions_type_id = $("#transactionType").val();
 
+  $("#MAIN_GetDocumentCustomsNGen > .spinner-border").removeClass("collapse");
+
   fetch(MAIN_GetDocumentCustomsNGen_url, {
     method: "POST",
     body: JSON.stringify({
@@ -169,6 +171,7 @@ var MAIN_GetDocumentCustomsNGen = (CUST_ID_PPJK, terminal_id) => {
     .then((response) => response.json())
     .then((json) => {
       console.log(json);
+      $("#MAIN_GetDocumentCustomsNGen > .spinner-border").addClass("collapse");
 
       if (json.STATUS == "FALSE") {
         $("table > tbody > tr").remove();

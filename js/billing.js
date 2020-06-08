@@ -19,23 +19,32 @@ var BILLING_GetBilling = (transaction_id) => {
             $("table > body").append(`<b>${key}</b> ${val} <br/>`);
           } else {
             $.map(val, function (elementOrValue, indexOrKey) {
-              $("table > tbody").append(
+              if (typeof elementOrValue != "object") {
+                $("table > tbody").append(
+                  `
+                <tr>
+                  <td>${indexOrKey}</td>
+                  <td>
+                  ${elementOrValue}
+                  ${
+                    indexOrKey == "LINK" || indexOrKey == "LINK_PRO"
+                      ? "<a target='_blank' href=" +
+                        elementOrValue +
+                        ">Download</a>"
+                      : ""
+                  }
+                  </td>
+                  </tr>
                 `
-              <tr>
-                <td>${indexOrKey}</td>
-                <td>
-                ${elementOrValue}
-                ${
-                  indexOrKey == "LINK" || indexOrKey == "LINK_PRO"
-                    ? "<a target='_blank' href=" +
-                      elementOrValue +
-                      ">Download</a>"
-                    : ""
+                );
+              } else {
+                if (indexOrKey == "SUMMARY_DETAIL") {
+                  for (let i = 0; i < elementOrValue.CHARGE.length; i++) {
+                    console.log(elementOrValue.COMPONENT_GROUP_INVOICE_ID[i]);
+                    // console.log(elementOrValue.CHARGE[i]);
+                  }
                 }
-                </td>
-                </tr>
-              `
-              );
+              }
             });
           }
         });
